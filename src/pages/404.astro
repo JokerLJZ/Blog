@@ -1,52 +1,74 @@
 ---
-import BaseLayout from '@layouts/BaseLayout.astro';
-import Container from '@components/Container.astro';
-import { Icon } from 'astro-icon/components';
-import { getLink } from '@utils/paths';
+import { Icon } from "astro-icon/components";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
+import MainGridLayout from "@/layouts/MainGridLayout.astro";
+import { url } from "@/utils/url-utils";
 ---
 
-<BaseLayout title="Page Not Found" description="Sorry, we couldn't find the page you're looking for.">
-  <Container as="main" class="py-16 max-w-4xl mx-auto text-center">
-    <div class="flex flex-col items-center">
-      <div class="text-9xl font-bold text-indigo-600 dark:text-indigo-500">404</div>
-      <h1 class="text-3xl md:text-4xl font-bold mt-6 mb-4">Page Not Found</h1>
-      <p class="text-xl text-slate-600 dark:text-slate-400 mb-10">
-        Sorry, we couldn't find the page you're looking for.
-      </p>
-      
-      <div class="mb-16 grid grid-cols-1 md:grid-cols-3 gap-5">
-        <a 
-          href={getLink('/')} 
-          class="flex items-center justify-center gap-2 px-6 py-4 bg-indigo-100 hover:bg-indigo-200 dark:bg-indigo-900/40 dark:hover:bg-indigo-900/60 rounded-lg transition-colors"
-        >
-          <Icon name="heroicons:home" class="h-5 w-5" />
-          <span>Go Home</span>
-        </a>
-        <a 
-          href={getLink('/blog')} 
-          class="flex items-center justify-center gap-2 px-6 py-4 bg-indigo-100 hover:bg-indigo-200 dark:bg-indigo-900/40 dark:hover:bg-indigo-900/60 rounded-lg transition-colors"
-        >
-          <Icon name="heroicons:document-text" class="h-5 w-5" />
-          <span>Read Blog</span>
-        </a>
-        <a 
-          href={getLink('/categories')} 
-          class="flex items-center justify-center gap-2 px-6 py-4 bg-indigo-100 hover:bg-indigo-200 dark:bg-indigo-900/40 dark:hover:bg-indigo-900/60 rounded-lg transition-colors"
-        >
-          <Icon name="heroicons:tag" class="h-5 w-5" />
-          <span>Browse Categories</span>
-        </a>
-      </div>
-      
-      <div>
-        <h2 class="text-xl font-bold mb-4">You might be interested in:</h2>
-        <div class="flex flex-wrap justify-center gap-3">
-          <a href={getLink('/tags/javascript')} class="text-indigo-600 dark:text-indigo-400 hover:underline">JavaScript</a>
-          <a href={getLink('/tags/css')} class="text-indigo-600 dark:text-indigo-400 hover:underline">CSS</a>
-          <a href={getLink('/tags/react')} class="text-indigo-600 dark:text-indigo-400 hover:underline">React</a>
-          <a href={getLink('/tags/web-development')} class="text-indigo-600 dark:text-indigo-400 hover:underline">Web Development</a>
+<MainGridLayout title={i18n(I18nKey.notFound)} description={i18n(I18nKey.notFoundDescription)}>
+    <div class="flex w-full rounded-(--radius-large) overflow-hidden relative min-h-96">
+        <div class="card-base z-10 px-9 py-12 relative w-full flex flex-col items-center justify-center text-center">
+            <!-- 404 大号数字 -->
+            <div class="text-8xl md:text-9xl font-bold text-(--primary) opacity-20 mb-4">
+                {i18n(I18nKey.notFound)}
+            </div>
+            
+            <!-- 404 图标 -->
+            <div class="mb-6">
+                <Icon name="material-symbols:error-outline" class="text-6xl text-(--primary)" />
+            </div>
+            
+            <!-- 标题 -->
+            <div class="text-3xl md:text-4xl font-bold mb-4 text-90">
+                {i18n(I18nKey.notFoundTitle)}
+            </div>
+            
+            <!-- 描述 -->
+            <p class="text-lg text-75 mb-8 max-w-md">
+                {i18n(I18nKey.notFoundDescription)}
+            </p>
+            
+            <!-- 返回首页按钮 -->
+            <a 
+                href={url("/")}
+                class="inline-flex items-center gap-2 px-6 py-3 bg-(--primary) text-white rounded-(--radius-large) hover:bg-(--btn-content) transition-colors duration-200 font-medium"
+            >
+                <Icon name="material-symbols:home" class="text-xl" />
+                {i18n(I18nKey.backToHome)}
+            </a>
+            
+            <!-- 装饰性元素 -->
+            <div class="absolute top-4 left-4 opacity-10">
+                <Icon name="material-symbols:sentiment-sad" class="text-4xl text-(--primary)" />
+            </div>
+            <div class="absolute bottom-4 right-4 opacity-10">
+                <Icon name="material-symbols:search-off" class="text-4xl text-(--primary)" />
+            </div>
         </div>
-      </div>
     </div>
-  </Container>
-</BaseLayout> 
+</MainGridLayout>
+
+<style>
+    /* 添加一些动画效果 */
+    .card-base {
+        animation: fadeInUp 0.6s ease-out;
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    /* 按钮悬停效果 */
+    a:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.3);
+    }
+</style>

@@ -1,81 +1,25 @@
 ---
-import ThreeColumnLayout from '@layouts/ThreeColumnLayout.astro';
-import { getCollection } from 'astro:content';
-import { formatPageTitle, getSiteConfig, getSocialConfig } from '@utils/config';
 
-// Get all blog posts and projects to extract existing tags
-const allPosts = await getCollection('blog');
-const allProjects = await getCollection('projects');
+import { getEntry, render } from "astro:content";
+import Markdown from "@components/common/Markdown.astro";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
+import MainGridLayout from "@/layouts/MainGridLayout.astro";
 
-// Extract all existing tags
-const blogTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))];
-const projectTags = [...new Set(allProjects.flatMap(project => project.data.tags || []))];
-const existingTags = [...new Set([...blogTags, ...projectTags])].map(tag => tag.toLowerCase());
+const aboutPost = await getEntry("spec", "about");
 
-// Function to check if a skill has a matching tag
-function hasMatchingTag(skill) {
-  const normalizedSkill = skill.toLowerCase().replace(/\s+/g, '-');
-  return existingTags.includes(normalizedSkill) || existingTags.includes(skill.toLowerCase());
+if (!aboutPost) {
+	throw new Error("About page content not found");
 }
 
-// Function to create a tag URL
-function getTagUrl(skill) {
-  const normalizedSkill = skill.toLowerCase().replace(/\s+/g, '-');
-  return `/tags/${normalizedSkill}`;
-}
-
-const skillsData = [
-  {
-    category: "兴趣领域",
-    skills: ["动漫", "游戏", "吉他", "技术"]
-  }
-];
-
-const siteConfig = getSiteConfig();
-const socialConfig = getSocialConfig();
+const { Content } = await render(aboutPost);
 ---
-
-<ThreeColumnLayout title={formatPageTitle('About')}>
-  <header class="pb-8 border-b border-slate-200 dark:border-slate-800 mb-8">
-    <h1 class="text-4xl font-bold mb-4">About Me</h1>
-  </header>
-  
-  <div class="prose dark:prose-invert prose-lg max-w-none">
-    <p>
-      欢迎来到火柴人的Blog！这里是我在互联网上的个人空间，记录技术、动漫、游戏以及各种乱七八糟的想法。
-    </p>
-
-    <h2>关于我</h2>
-    <p>
-      昵称<strong>火柴人</strong>，源于 2003 年的电影 <em>Matchstick Men</em>。
-      想的多，动得少，拥有超强的质疑精神，对自己的观点接近不可动摇的坚持。什么玩意儿都略懂但是只懂点皮毛。
-    </p>
-    <p>
-      MBTI 类型：ENTJ（但自己觉得更像 ENTP）。骚话连篇，喜欢意料之外的发言，欢迎 challenge 我的所有观点。
-    </p>
-
-    <h2>兴趣爱好</h2>
-    <ul>
-      <li><strong>动漫</strong>：B站已看完番剧 300+</li>
-      <li><strong>游戏</strong>：Steam 游戏时长 2062h，NS 游戏时长 3097h，管理 20+ 人的咸鱼之王俱乐部</li>
-      <li><strong>吉他</strong>：野路子，基础弹唱手到擒来，但没有进阶的计划</li>
-    </ul>
-
-    <h2>性格特质</h2>
-    <ul>
-      <li><strong>优势</strong>：有一定的 Geek 精神，人文社科外的知识面还算比较广（历史地理盲），想好的事情和目标似乎都能达成</li>
-      <li><strong>沟通偏好</strong>：骚话连篇，喜欢意料之外的发言，欢迎 challenge 我的所有观点</li>
-      <li><strong>最大的问题</strong>：行动过程中容易发散，愿意听但基本不接受外部意见。只要觉得有人能干的事尤其干的比我好的事，大概率就不会干</li>
-    </ul>
-
-    <h2>联系方式</h2>
-    <ul>
-      <li><a href={socialConfig.github} target="_blank" rel="noopener noreferrer">GitHub</a></li>
-      <li>Email: <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></li>
-    </ul>
-
-    <p>
-      感谢来访，希望你能在这里找到有意思的内容！
-    </p>
-  </div>
-</ThreeColumnLayout> 
+<MainGridLayout title={i18n(I18nKey.about)} description={i18n(I18nKey.about)}>
+    <div class="flex w-full rounded-(--radius-large) overflow-hidden relative min-h-32">
+        <div class="card-base z-10 px-9 py-6 relative w-full ">
+            <Markdown class="mt-2">
+                <Content />
+            </Markdown>
+        </div>
+    </div>
+</MainGridLayout>

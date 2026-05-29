@@ -1,243 +1,147 @@
-# Modern Personal Blog with Astro
+# 火柴人的Blog
 
-A modern, fast, and feature-rich blog platform built with Astro, React, and Tailwind CSS.
+> 想的多，动得少，拥有超强的质疑精神。动漫、游戏、技术，什么玩意儿都略懂但只懂点皮毛。
 
-## 💡 System Overview
+个人博客，记录技术、动漫、游戏以及各种乱七八糟的想法。
 
-This blog platform combines modern web technologies to create a performant, feature-rich content management system. Key capabilities include:
+- 🌐 站点地址：<https://blog.stickman.life>
+- 🎨 主题：[Firefly](https://github.com/CuteLeaf/Firefly)（基于 [Fuwari](https://github.com/saicaca/fuwari) 二次开发）
+- ⚙️ 技术栈：Astro 6 + Svelte 5 + Tailwind CSS 4 + pnpm
+- ☁️ 部署：Cloudflare Pages
 
-**Content Management**
-- MDX-powered blog posts with rich formatting and code highlighting
-- Hierarchical categorization with main categories and subjects
-- Tagging system with related content discovery
-- Featured posts and draft mode
-
-**User Experience**
-- Responsive three-column layout with mobile optimization
-- Dark/light mode theming with smooth transitions
-- Optimized article listings with consistent alignment
-- Enhanced navigation with dynamic category menus
-
-**Performance**
-- Static site generation for lightning-fast page loads
-- Image optimization and lazy loading
-- CSS/JS minification and code splitting
-- High PageSpeed and Core Web Vitals scores
-
-**Developer Experience**
-- Component-based architecture for maintainability
-- Tailwind CSS for rapid styling
-- Content collections for type-safe content management
-- Clear conventions and documentation
-
-## 📚 Content Management
-
-### Blog Posts
-Blog posts are stored in `src/content/blog/` as MDX files. Each post should follow this structure:
-
-```md
----
-title: Your Post Title
-description: A brief description of your post
-pubDate: 2024-01-01
-updatedDate: 2024-01-02 # Optional
-heroImage: https://example.com/image.jpg # Optional
-tags: ['typescript', 'react', 'web development']
-categories: ['programming']
-subject: 'React' # For sub-categorization
-draft: false
-featured: false
-author: Your Name
-location: City, Country
 ---
 
-Your content here...
-```
+## 🚀 快速开始
 
-### Frontmatter Fields
+### 环境要求
 
-#### Required
-- `title`: Post title
-- `description`: Brief summary (150-160 characters recommended)
-- `pubDate`: Publication date (YYYY-MM-DD)
-- `tags`: Array of relevant tags
-- `categories`: Array of categories
+- **Node.js ≥ 22**
+- **pnpm ≥ 9**（项目通过 `preinstall` 强制使用 pnpm，请勿用 npm / yarn 安装）
 
-#### Optional
-- `updatedDate`: Last update date
-- `heroImage`: Featured image URL
-- `subject`: Sub-category within main category
-- `draft`: Set to `true` to exclude from production build
-- `featured`: Set to `true` to highlight on homepage
-- `author`: Post author name
-- `location`: Author's location
-
-### Available Tags
-- Technology: `web development`, `tools`, `software`
-- Programming: `javascript`, `typescript`, `react`, `node.js`
-- Design: `ui`, `ux`, `css`, `design systems`
-- General: `tutorial`, `guide`, `opinion`, `career`
-
-## 🏗 Project Architecture
-
-```
-src/
-├── components/     # Reusable UI components
-├── content/        # Blog posts and content collections
-│   ├── blog/      # Blog posts (MDX)
-│   └── projects/  # Project showcases
-├── layouts/        # Page layouts
-├── pages/         # Route pages
-│   ├── blog/      # Blog post pages
-│   ├── categories/ # Category pages with subject sub-pages
-│   └── tags/      # Tag pages
-└── styles/        # Global styles
-```
-
-### Key Components
-- `ThreeColumnLayout.astro`: Main blog layout
-- `ArticleCard.astro`: Blog post preview card
-- `ArticleListItem.astro`: Compact article listing with optimized alignment
-- `TableOfContents.astro`: Auto-generated post ToC
-- `Navigation.astro`: Main navigation menu with mobile optimization
-- `Sidebar.astro`: Right sidebar with recent posts/tags
-
-## 🚀 Features
-
-### Content
-- ✍️ MDX Support
-  - Rich text formatting
-  - React components in markdown
-  - Code syntax highlighting
-  - Auto-generated table of contents
-
-- 🏷 Content Organization
-  - Tags and categories
-  - Subject-based sub-categorization
-  - Category pages with two-column layout
-  - "View All" functionality for subject pages
-  - Related posts
-  - Featured posts
-  - Draft posts
-
-### Design
-- 🎨 Theming
-  - Dark/light mode
-  - Responsive design
-  - Custom typography
-  - Tailwind CSS utilities
-
-- 📱 Layout
-  - Three-column desktop layout
-  - Mobile-friendly navigation
-  - Optimized date and title alignment
-  - Sticky sidebar
-  - Smooth animations
-
-### Performance
-- ⚡️ Fast by Default
-  - Static site generation
-  - Image optimization
-  - CSS/JS minification
-  - Lazy loading
-
-### SEO
-- 🔍 SEO Optimized
-  - Meta tags
-  - Open Graph
-  - JSON-LD
-  - Sitemap
-  - RSS feed
-
-## 💻 Development
+### 本地开发
 
 ```bash
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
+pnpm install      # 安装依赖
+pnpm dev          # 启动开发服务器，访问 http://localhost:4321
+pnpm build        # 构建到 ./dist/
+pnpm preview      # 本地预览构建结果
 ```
 
-### Adding New Features
-1. Components: Add to `src/components/`
-2. Styles: Modify `src/styles/global.css`
-3. Routes: Create in `src/pages/`
-4. Content: Add to `src/content/`
+### 常用命令
 
-### Content Collections
-Content is managed through Astro's Content Collections:
+| 命令                       | 作用                                   |
+|:---------------------------|:---------------------------------------|
+| `pnpm install`             | 安装依赖                               |
+| `pnpm dev`                 | 在 `localhost:4321` 启动开发服务器     |
+| `pnpm build`               | 构建网站到 `./dist/`                   |
+| `pnpm preview`             | 本地预览已构建的网站                   |
+| `pnpm check`               | 检查代码错误                           |
+| `pnpm format`              | 使用 Biome 格式化代码                  |
+| `pnpm new-post <filename>` | 创建新文章                             |
 
-```typescript
-// src/content/config.ts
-export const collections = {
-  blog: defineCollection({
-    schema: blogSchema
-  }),
-  projects: defineCollection({
-    schema: projectSchema
-  })
-}
+## 📝 写文章
+
+文章放在 `src/content/posts/` 下（`.md` 或 `.mdx`）。Frontmatter 格式如下：
+
+```yaml
+---
+title: 文章标题
+published: 2025-05-28      # 发布日期
+description: 文章摘要
+image: ./cover.jpg         # 可选，封面图；或填 "api" 启用随机封面
+tags: [标签1, 标签2]        # 数组
+category: 分类              # 字符串（注意：单个分类，不是数组）
+draft: false               # 草稿
+pinned: false              # 置顶
+comment: true              # 是否允许评论
+---
 ```
 
-## 🔧 Configuration
+> ⚠️ Frontmatter 字段与旧主题不同，详见下方[注意事项](#-注意事项)。
 
-### Astro Config
-Edit `astro.config.mjs` for:
-- Site metadata
-- Markdown/MDX options
-- Integration settings
-- Build configuration
+## ⚙️ 配置
 
-### Tailwind Config
-Edit `tailwind.config.js` for:
-- Theme customization
-- Color palette
-- Typography
-- Custom utilities
+所有配置集中在 `src/config/` 目录，按功能拆分：
 
-## 📝 Writing Guidelines
+| 文件                  | 作用                       |
+|:----------------------|:---------------------------|
+| `siteConfig.ts`       | 站点基础信息、布局、页面开关 |
+| `profileConfig.ts`    | 个人资料、社交链接          |
+| `commentConfig.ts`    | 评论系统（giscus 等）       |
+| `navBarConfig.ts`     | 导航栏                      |
+| `announcementConfig.ts` | 公告                      |
+| `sidebarConfig.ts`    | 侧边栏小组件                |
+| `musicConfig.ts`      | 音乐播放器                  |
+| `pioConfig.ts`        | Live2D 看板娘               |
+| `effectsConfig.ts`    | 樱花等动画特效              |
+| `footerConfig.ts`     | 页脚                        |
+| `friendsConfig.ts` / `galleryConfig.ts` / `sponsorConfig.ts` | 友链 / 相册 / 赞助 |
 
-### Post Structure
-1. Clear title and description
-2. Engaging introduction
-3. Well-organized sections with headings
-4. Relevant code examples
-5. Conclusion or call-to-action
+> 完整配置说明可参考 Firefly 官方文档：<https://docs-firefly.cuteleaf.cn/>
 
-### Markdown Features
-- Headers: `# H1` through `###### H6`
-- Lists: Ordered and unordered
-- Code blocks with language syntax
-- Images with captions
-- Blockquotes
-- Tables
+## ☁️ 部署
 
-### Code Examples
-````md
-```typescript
-// Your code here
-```
-````
+### Cloudflare Pages（当前使用）
 
-### Images
-```md
-![Alt text](image-url)
-```
+| 项目       | 值              |
+|:-----------|:----------------|
+| 构建命令   | `pnpm run build` |
+| 输出目录   | `dist`          |
+| 安装命令   | `pnpm install`  |
+| Node 版本  | `22`（环境变量 `NODE_VERSION=22`） |
 
-## 🤝 Contributing
+> 必须使用 `pnpm run build`（包含 generate-icons、generate-lqips、pagefind 等步骤），不要直接用 `astro build`。
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
+### GitHub Pages（备选）
 
-## 📄 License
+仓库自带 `.github/workflows/deploy.yml`，推送到 `main` 分支会自动构建并部署到 `pages` 分支。若只用 Cloudflare Pages，可忽略或删除该工作流。
 
-MIT © 2025
+---
+
+## 🆕 更新记录
+
+### 2026-05-30 · 执行迁移待办
+
+- **评论（giscus）**：已开启仓库 `JokerLJZ/Blog` 的 Discussions，填入真实 `repoId`（`R_kgDOSpjRaw`）与 `General` 分类的 `categoryId`，`type` 改为 `giscus`。**仅剩手动安装 [giscus App](https://github.com/apps/giscus) 并授权本仓库这一步。**
+- **头像 / Favicon**：头像改用站点 `logo.svg`；`favicon.ico` 换成旧主题保留的图标，并据此重新生成了 8 个 PNG 变体（light/dark × 32/128/180/192）。
+- **音乐播放器**：已关闭（导航栏 + 双侧边栏），并清空主题自带的网易云歌单、移除演示音频文件。
+- **留言板**：已启用（复用上面配好的 giscus 评论）。
+- **相册**：已启用，清空了主题自带的演示相册，目前为空白页，待填入自己的图片。
+- 友链 / 赞助 / 番组计划仍保持关闭（需要各自的内容 / 账号后再开启）。
+
+### 2026-05-29 · 切换至 Firefly 主题
+
+将博客主题由「Modern Personal Blog」（Astro 4 + React + Tailwind 3 + npm）整体更换为 [Firefly](https://github.com/CuteLeaf/Firefly)（基于 Fuwari，Astro 6 + Svelte 5 + Tailwind 4 + pnpm）。
+
+主要变更：
+
+- **技术栈升级**：Node 要求提升至 ≥ 22，包管理器由 npm 改为 pnpm ≥ 9。
+- **套用本站身份**：站点标题/副标题/描述/URL/关键词、作者资料、社交链接（GitHub `JokerLJZ`、Email）、导航栏、关于页、公告均已替换为本站信息。
+- **评论系统**：预置 giscus，仓库设为 `JokerLJZ/Blog`；待填入 `repoId` / `categoryId` 后启用。
+- **暂时关闭演示页面**：随主题附带演示内容的「友链 / 赞助 / 留言板 / 番组计划 / 相册」页面已关闭（访问会跳转 404），配置好自己的内容后可在 `siteConfig.ts` 的 `pages` 中逐个开启。
+- **文章迁移**：首篇 `Hello World` 已转换为 Firefly 的 frontmatter 格式保留，其余主题自带的演示文章已移除。
+- **CI / 部署**：GitHub Actions 工作流触发分支由 `master` 调整为 `main`。
+- **清理上游文件**：移除了 CuteLeaf 专属的 `FUNDING.yml`、Issue / PR 模板、多语言项目 README 与宣传图。
+
+> 详细的迁移清单与待办见 [docs/CHANGELOG.md](docs/CHANGELOG.md)。
+
+## ⚠️ 注意事项
+
+1. **运行环境**：必须 Node.js ≥ 22、pnpm ≥ 9。项目已用 `preinstall` 强制 pnpm，使用 npm / yarn 会被拦截。
+2. **Frontmatter 格式已变化**（从旧主题迁移文章时务必注意）：
+   - 发布日期：`pubDate` → **`published`**
+   - 分类：`categories: [...]`（数组）→ **`category: "..."`**（字符串）
+   - 置顶：`featured` → **`pinned`**
+3. **构建命令**：本地与平台都用 `pnpm run build`；它会先生成图标、LQIP 占位图，构建后再跑 Pagefind 索引，单独 `astro build` 会缺少这些步骤。
+4. **评论仅剩最后一步**：giscus 已配好（仓库 `JokerLJZ/Blog`、`repoId`、`categoryId` 均已填入，Discussions 已开启，`type` 已为 `giscus`）。**还需手动在 <https://github.com/apps/giscus> 安装 giscus App 并授权 `JokerLJZ/Blog` 仓库**，评论才会加载。
+5. **相册需要你的图片**：相册页已启用但内容为空，请在 `galleryConfig.ts` 添加相册并把图片放进 `public/gallery/<id>/`。
+6. **仍关闭的页面**：`friends`（友链）/ `sponsor`（赞助）/ `bangumi`（番组计划）仍为关闭状态，配置好对应内容后在 `siteConfig.ts` 的 `pages` 开启。
+7. **本地构建报 `EACCES`**：若 `npx` 因 npm 缓存权限报错（`~/.npm` 含 root 文件），执行 `sudo chown -R $(id -u):$(id -g) ~/.npm` 修复，或临时设置 `npm_config_cache=/tmp/npm-cache` 后再构建。
+8. **版权与署名**：Firefly 与 Fuwari 均为 MIT 协议，已保留 `LICENSE` 中的版权声明；若复用了 Firefly 的特色组件设计或代码，请按其要求注明来源。
+
+## 🙏 致谢与许可
+
+- 主题：[Firefly](https://github.com/CuteLeaf/Firefly) © 2025 [CuteLeaf](https://github.com/CuteLeaf)
+- 原始模板：[Fuwari](https://github.com/saicaca/fuwari) © 2024 [saicaca](https://github.com/saicaca)
+
+本项目遵循 [MIT License](./LICENSE)，详见 `LICENSE` 文件。
