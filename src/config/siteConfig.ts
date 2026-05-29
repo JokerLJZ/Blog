@@ -20,15 +20,7 @@ export const siteConfig: SiteConfig = {
 		"想的多，动得少，拥有超强的质疑精神。动漫、游戏、技术，什么玩意儿都略懂但只懂点皮毛。",
 
 	// 站点关键词
-	keywords: [
-		"火柴人",
-		"Stickman",
-		"博客",
-		"技术博客",
-		"动漫",
-		"游戏",
-		"Astro",
-	],
+	keywords: ["火柴人", "Stickman", "博客", "技术博客", "动漫", "游戏", "Astro"],
 
 	// 主题色
 	themeColor: {
