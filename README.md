@@ -100,6 +100,20 @@ comment: true              # 是否允许评论
 
 ## 🆕 更新记录
 
+### 2026-05-30 · 从 Notion 迁移 + 接入量化交易日志
+
+- **弃用 Notion**：原先经 NotionNext 发布的博客与 SMA 交易日志全部迁移到本 Astro 站点。
+- **历史文章迁移**：NotionNext 数据库中的 4 篇文章 + 3 个月（2026-03/04/05）交易日志已转成 markdown 放入 `src/content/posts/`，图片下载到 `public/`。
+  - `小米路由器局域网科学上网` 因正文在 Notion「同步块」中且来源页未授权 API，未能自动迁移，已标记为 `draft: true` 待手动补全。
+  - 2026-04 部分交易日志图表原存于 catbox.moe，已失效的少量图片为坏链（源已丢失）。
+- **交易日志自动发布**：量化程序（`quant_claude`）每日收盘后直接写 markdown 到
+  `src/content/posts/trading-log-YYYY-MM/index.md`（按月一篇，当日段落置顶 upsert），
+  图表存 `public/trading-log/YYYY-MM/`，并自动 `git push` 触发 Cloudflare 部署。
+- **研究报告**同理写入 `src/content/posts/sma-strategy-optimization-report-YYYY_MMDD.md`。
+- 一次性迁移脚本：`scripts/migrate_notion.py`（已完成迁移，可留作存档或删除）。
+
+> ⚠️ 本仓库现由量化程序自动提交交易日志，请勿与自动 push 冲突；本地有改动时先 `git pull`。
+
 ### 2026-05-30 · 执行迁移待办
 
 - **评论（giscus）**：已开启仓库 `JokerLJZ/Blog` 的 Discussions，填入真实 `repoId`（`R_kgDOSpjRaw`）与 `General` 分类的 `categoryId`，`type` 改为 `giscus`。**仅剩手动安装 [giscus App](https://github.com/apps/giscus) 并授权本仓库这一步。**
