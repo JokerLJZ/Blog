@@ -81,20 +81,20 @@ comment: true              # 是否允许评论
 
 ## ☁️ 部署
 
-### Cloudflare Pages（当前使用）
+### Cloudflare Pages（当前使用，直接构建 `main`）
 
 | 项目       | 值              |
 |:-----------|:----------------|
+| 生产分支   | `main`          |
 | 构建命令   | `pnpm run build` |
 | 输出目录   | `dist`          |
 | 安装命令   | `pnpm install`  |
-| Node 版本  | `22`（环境变量 `NODE_VERSION=22`） |
+| Node 版本  | `22`（已由 `.node-version` 固定，亦可设环境变量 `NODE_VERSION=22`） |
 
 > 必须使用 `pnpm run build`（包含 generate-icons、generate-lqips、pagefind 等步骤），不要直接用 `astro build`。
+> Cloudflare 会依据 `package.json` 的 `packageManager: pnpm@9.14.4` 自动启用 pnpm（corepack）。
 
-### GitHub Pages（备选）
-
-仓库自带 `.github/workflows/deploy.yml`，推送到 `main` 分支会自动构建并部署到 `pages` 分支。若只用 Cloudflare Pages，可忽略或删除该工作流。
+> ⚠️ 单一构建源：已移除原 `.github/workflows/deploy.yml`（它会把产物推到 `pages` 分支，与 Cloudflare 直接构建 `main` 冲突，导致 Cloudflare 对静态产物误跑 `npm run build` 而失败）。现仅保留 `build.yml`（CI 检查，不部署）。每次 push 到 `main`（含量化程序自动推送的交易日志）由 Cloudflare 直接构建部署。
 
 ---
 
