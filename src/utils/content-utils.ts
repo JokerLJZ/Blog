@@ -4,9 +4,12 @@ import { i18n } from "@i18n/translation";
 import { getCategoryUrl } from "@utils/url-utils";
 
 // // Retrieve posts and sort them by publication date
-async function getRawSortedPosts() {
+// includeUnlisted=true 时包含 unlisted 文章（仅用于生成详情页静态路径）
+async function getRawSortedPosts(includeUnlisted = false) {
 	const allBlogPosts = await getCollection("posts", ({ data }) => {
-		return import.meta.env.PROD ? data.draft !== true : true;
+		const draftOk = import.meta.env.PROD ? data.draft !== true : true;
+		const listedOk = includeUnlisted ? true : data.unlisted !== true;
+		return draftOk && listedOk;
 	});
 
 	const sorted = allBlogPosts.sort((a, b) => {
@@ -22,9 +25,9 @@ async function getRawSortedPosts() {
 	return sorted;
 }
 
-export async function getSortedPosts() {
-	const sorted = await getRawSortedPosts();
-
+function wirePrevNext<T extends { id: string; data: CollectionEntry<"posts">["data"] }>(
+	sorted: T[],
+): void {
 	for (let i = 1; i < sorted.length; i++) {
 		sorted[i].data.nextSlug = sorted[i - 1].id;
 		sorted[i].data.nextTitle = sorted[i - 1].data.title;
@@ -33,8 +36,23 @@ export async function getSortedPosts() {
 		sorted[i].data.prevSlug = sorted[i + 1].id;
 		sorted[i].data.prevTitle = sorted[i + 1].data.title;
 	}
+}
 
+export async function getSortedPosts() {
+	const sorted = await getRawSortedPosts();
+	wirePrevNext(sorted);
 	return sorted;
+}
+
+// 用于详情页静态路径生成：包含 unlisted 文章，保证其详情页仍被构建；
+// 上一篇/下一篇只在「已列出」文章之间串联，unlisted 文章不参与导航链。
+export async function getPostsForStaticPaths() {
+	const listed = await getRawSortedPosts(false);
+	wirePrevNext(listed);
+	const unlisted = (await getRawSortedPosts(true)).filter(
+		(p) => p.data.unlisted === true,
+	);
+	return [...listed, ...unlisted];
 }
 export type PostForList = {
 	id: string;
@@ -58,7 +76,8 @@ export type Tag = {
 
 export async function getTagList(): Promise<Tag[]> {
 	const allBlogPosts = await getCollection<"posts">("posts", ({ data }) => {
-		return import.meta.env.PROD ? data.draft !== true : true;
+		const draftOk = import.meta.env.PROD ? data.draft !== true : true;
+		return draftOk && data.unlisted !== true;
 	});
 
 	const countMap: { [key: string]: number } = {};
@@ -85,7 +104,8 @@ export type Category = {
 
 export async function getCategoryList(): Promise<Category[]> {
 	const allBlogPosts = await getCollection<"posts">("posts", ({ data }) => {
-		return import.meta.env.PROD ? data.draft !== true : true;
+		const draftOk = import.meta.env.PROD ? data.draft !== true : true;
+		return draftOk && data.unlisted !== true;
 	});
 	const count: { [key: string]: number } = {};
 	allBlogPosts.forEach((post: { data: { category: string | null } }) => {
@@ -161,7 +181,8 @@ export async function getRelatedPosts(
 	maxCount = 5,
 ): Promise<PostForList[]> {
 	const allPosts = await getCollection<"posts">("posts", ({ data }) => {
-		return import.meta.env.PROD ? data.draft !== true : true;
+		const draftOk = import.meta.env.PROD ? data.draft !== true : true;
+		return draftOk && data.unlisted !== true;
 	});
 
 	// 排除自身和加密文章

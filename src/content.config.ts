@@ -15,6 +15,9 @@ const postsCollection = defineCollection({
 		category: z.string().optional().nullable().default(""),
 		lang: z.string().optional().default(""),
 		pinned: z.boolean().optional().default(false),
+		// 详情页正常生成，但不在首页/归档/RSS/分类/标签等列表中出现
+		// （用于交易日志等由父索引页统一归集的子页面）
+		unlisted: z.boolean().optional().default(false),
 		author: z.string().optional().default(""),
 		sourceLink: z.string().optional().default(""),
 		licenseName: z.string().optional().default(""),
