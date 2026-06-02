@@ -25,9 +25,9 @@ async function getRawSortedPosts(includeUnlisted = false) {
 	return sorted;
 }
 
-function wirePrevNext<T extends { id: string; data: CollectionEntry<"posts">["data"] }>(
-	sorted: T[],
-): void {
+function wirePrevNext<
+	T extends { id: string; data: CollectionEntry<"posts">["data"] },
+>(sorted: T[]): void {
 	for (let i = 1; i < sorted.length; i++) {
 		sorted[i].data.nextSlug = sorted[i - 1].id;
 		sorted[i].data.nextTitle = sorted[i - 1].data.title;
