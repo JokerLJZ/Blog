@@ -1,4 +1,5 @@
-import type { SidebarLayoutConfig } from "../types/config";
+import type { SidebarLayoutConfig } from "../types/sidebarConfig";
+import { adConfig1, adConfig2 } from "./adConfig";
 
 /**
  * 侧边栏布局配置
@@ -74,7 +75,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// 是否在文章详情页显示
 			showOnPostPage: true,
 			// 响应式配置
-			responsive: {
+				specificConfig: {
 				// 折叠阈值：当分类数量超过>5个时自动折叠
 				collapseThreshold: 5,
 			},
@@ -89,7 +90,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// 是否在文章详情页显示
 			showOnPostPage: true,
 			// 响应式配置
-			responsive: {
+				specificConfig: {
 				// 折叠阈值：当标签数量超过>10个时自动折叠
 				collapseThreshold: 10,
 			},
@@ -104,7 +105,8 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// 是否在文章详情页显示
 			showOnPostPage: true,
 			// 配置ID：使用第一个广告配置
-			configId: "ad1",
+			// 新版主题将广告配置嵌入组件专属配置
+			specificConfig: { ad: adConfig1 },
 		},
 	],
 
@@ -140,7 +142,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// 是否在文章详情页显示
 			showOnPostPage: true,
 			// 是否在非文章详情页显示
-			showOnNonPostPage: false,
+			hideOnNonPostPage: true,
 		},
 		{
 			// 组件类型：广告栏组件 2
@@ -152,7 +154,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// 是否在文章详情页显示
 			showOnPostPage: true,
 			// 配置ID：使用第二个广告配置
-			configId: "ad2",
+			specificConfig: { ad: adConfig2 },
 		},
 	],
 
@@ -191,7 +193,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// 是否在文章详情页显示
 			showOnPostPage: true,
 			// 响应式配置
-			responsive: {
+				specificConfig: {
 				// 折叠阈值：当分类数量超过5个时自动折叠
 				collapseThreshold: 5,
 			},
@@ -204,7 +206,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// 是否在文章详情页显示
 			showOnPostPage: true,
 			// 响应式配置
-			responsive: {
+				specificConfig: {
 				// 折叠阈值：当标签数量超过20个时自动折叠
 				collapseThreshold: 20,
 			},
