@@ -1,31 +1,31 @@
 import {
-	LinkPreset,
+	NavBarSearchMethod,
 	type NavBarConfig,
 	type NavBarLink,
 	type NavBarSearchConfig,
-	NavBarSearchMethod,
-} from "../types/config";
+} from "../types/navBarConfig";
+import { LinkPresets } from "../constants/link-presets";
 import { siteConfig } from "./siteConfig";
 
 // 根据页面开关动态生成导航栏配置
 const getDynamicNavBarConfig = (): NavBarConfig => {
 	// 基础导航栏链接
-	const links: (NavBarLink | LinkPreset)[] = [
+	const links: NavBarLink[] = [
 		// 主页
-		LinkPreset.Home,
+		LinkPresets.Home,
 
 		// 归档
-		LinkPreset.Archive,
+		LinkPresets.Archive,
 	];
 
 	// 根据配置决定是否添加友链，在siteConfig关闭pages.friends时导航栏不显示友链
 	if (siteConfig.pages.friends) {
-		links.push(LinkPreset.Friends);
+		links.push(LinkPresets.Friends);
 	}
 
 	// 根据配置决定是否添加留言板，在siteConfig关闭pages.guestbook时导航栏不显示留言板
 	if (siteConfig.pages.guestbook) {
-		links.push(LinkPreset.Guestbook);
+		links.push(LinkPresets.Guestbook);
 	}
 
 	// 我的及其子菜单
@@ -35,10 +35,10 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 		icon: "material-symbols:person",
 		children: [
 			// 根据配置决定是否添加相册，在siteConfig关闭pages.gallery时导航栏不显示相册
-			...(siteConfig.pages.gallery ? [LinkPreset.Gallery] : []),
+			...(siteConfig.pages.gallery ? [LinkPresets.Gallery] : []),
 
 			// 根据配置决定是否添加番组计划，在siteConfig关闭pages.bangumi时导航栏不显示番组计划
-			...(siteConfig.pages.bangumi ? [LinkPreset.Bangumi] : []),
+			...(siteConfig.pages.bangumi ? [LinkPresets.Bangumi] : []),
 		],
 	});
 
@@ -49,10 +49,10 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 		icon: "material-symbols:info",
 		children: [
 			// 根据配置决定是否添加赞助，在siteConfig关闭pages.sponsor时导航栏不显示赞助
-			...(siteConfig.pages.sponsor ? [LinkPreset.Sponsor] : []),
+			...(siteConfig.pages.sponsor ? [LinkPresets.Sponsor] : []),
 
 			// 关于页面
-			LinkPreset.About,
+			LinkPresets.About,
 		],
 	});
 

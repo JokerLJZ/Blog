@@ -29,11 +29,18 @@ yarn.lock
 # ide
 .idea
 *.iml
-.claude
 
 # docs
 Firefly-docs/
 
+# lite 版本
+Firefly-Lite/
+
 cache/
 package/
 .obsidian/
+
+# vibe coding
+.codex*
+.claude
+.mimocode
