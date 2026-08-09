@@ -5,7 +5,7 @@ updated: 2026-08-07
 description: "2026年08月 SMA 策略实盘交易日志（按日记录，最新优先）"
 tags: ["SMA", "实盘交易", "交易日志"]
 category: "量化交易"
-draft: false
+draft: true
 unlisted: true
 ---
 
