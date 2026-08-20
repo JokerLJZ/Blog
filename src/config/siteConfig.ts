@@ -45,15 +45,12 @@ export const siteConfig: SiteConfig = {
 	},
 
 	// Favicon 配置
-	// 如果启用了OpenGraph图片功能，数组中需要包含png格式的favicon图标
+	// 如果启用了 OpenGraph 图片功能，图标需使用 PNG 或 SVG 等 sharp 支持的格式
 	favicon: [
 		{
-			// 图标文件路径
-			src: "/favicon/favicon.ico",
-			// 可选，指定主题 'light' | 'dark'
-			// theme: "light",
-			// 可选，图标大小
-			// sizes: "32x32",
+			// 使用品牌纯图形版本，适合浏览器标签页和 OpenGraph 图像
+			src: "/assets/images/logo/stickman-life-3.svg",
+			sizes: "192x192",
 		},
 	],
 
@@ -70,7 +67,7 @@ export const siteConfig: SiteConfig = {
 		// 使用 Astro 图标库时不需要设置 valueDark，图标会自动跟随主题亮暗色切换
 		logo: {
 			type: "image",
-			value: "/logo.svg",
+			value: "/assets/images/logo/stickman-life-1.svg",
 			alt: "火柴人的Blog",
 		},
 		// 导航栏标题
