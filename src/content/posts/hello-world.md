@@ -2,6 +2,7 @@
 title: Hello World
 published: 2025-05-28
 description: 火柴人的Blog 正式上线，这是第一篇文章。
+image: "/assets/images/article-covers/blue-mountain-elf.png"
 tags: [博客]
 category: 随笔
 draft: false

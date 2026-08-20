@@ -28,7 +28,8 @@ function appendSeedParam(apiUrl: string, hash: number): string {
 
 /**
  * 处理文章封面图
- * 当image字段为"api"时，返回第一个API的URL（客户端会按顺序尝试所有API）
+ * 未指定 image 时根据文章 seed 稳定抽取本地封面图；当 image 字段为 "api" 时，
+ * 返回第一个 API 的 URL（客户端会按顺序尝试所有 API）。
  * @param image - 文章frontmatter中的image字段值
  * @param seed - 用于生成唯一URL的种子（文章id或slug）
  */
@@ -37,7 +38,16 @@ export function processCoverImageSync(
 	seed?: string,
 ): string {
 	if (!image || image === "") {
-		return "";
+		if (!randomCoverImage.enable || randomCoverImage.localImages.length === 0) {
+			return "";
+		}
+
+		const hash = getSeedHash(seed);
+		return (
+			randomCoverImage.localImages[
+				hash % randomCoverImage.localImages.length
+			] ?? ""
+		);
 	}
 
 	if (image !== "api") {

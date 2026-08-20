@@ -2,6 +2,7 @@
 title: "SMA 均线交叉策略最优化研究 (2026-03-22)"
 published: 2026-03-22
 description: "基于SMA交叉策略的参数网格搜索与回测优化研究，涵盖725,760组因子组合的完整回测分析。"
+image: "/assets/images/article-covers/anime-red-bow.png"
 tags: ["SMA", "量化策略", "回测"]
 category: "量化交易"
 draft: false

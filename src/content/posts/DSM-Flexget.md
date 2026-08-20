@@ -2,6 +2,7 @@
 title: "群晖配置Flexget套件"
 published: 2025-12-04
 description: "群晖的Flexget套件安装配置教程"
+image: "/assets/images/article-covers/autumn-leaves.jpg"
 tags: ["工具", "推荐"]
 category: "技术分享"
 draft: false

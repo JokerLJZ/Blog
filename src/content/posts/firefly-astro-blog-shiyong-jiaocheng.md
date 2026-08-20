@@ -2,6 +2,7 @@
 title: Firefly Astro Blog使用教程
 published: 1969-12-31
 description: 汇总 Firefly Astro 博客主题的配置、Markdown、布局、图表、代码块、文章加密与多媒体使用方法。
+image: "/assets/images/article-covers/elf-sunlight.jpg"
 tags: [Firefly, Astro, 博客, 教程, Markdown]
 category: 技术
 draft: false

@@ -2,6 +2,7 @@
 title: "SMA实盘交易日志 — 2026年05月"
 published: 2026-05-01
 description: "2026年05月 SMA 策略实盘交易日志（按日记录，最新优先）"
+image: "/assets/images/article-covers/pastel-clock.jpg"
 tags: ["SMA", "实盘交易", "交易日志"]
 category: "量化交易"
 draft: true

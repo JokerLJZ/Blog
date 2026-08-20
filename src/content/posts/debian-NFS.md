@@ -2,6 +2,7 @@
 title: "Debian 13 NFS挂载群晖NAS共享文件夹"
 published: 2026-05-08
 description: ""
+image: "/assets/images/article-covers/study-desk.jpg"
 tags: ["工具", "网络"]
 category: "技术分享"
 draft: false

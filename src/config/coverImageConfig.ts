@@ -6,8 +6,8 @@ import type { CoverImageConfig } from "../types/config";
  * enableInPost - 是否在文章详情页显示封面图
  *
  * 随机封面图使用说明：
- * 1. 在文章的 Frontmatter 中添加 image: "api" 即可使用随机图功能
- * 2. 系统会依次尝试所有配置的 API，全部失败后使用备用图片
+ * 1. 未设置 image 的文章会根据文章 id 稳定抽取一张本地封面图
+ * 2. 在文章的 Frontmatter 中添加 image: "api" 仍可使用随机图 API
  *
  * // 文章 Frontmatter 示例：
  * ---
@@ -21,7 +21,19 @@ export const coverImageConfig: CoverImageConfig = {
 
 	randomCoverImage: {
 		// 随机封面图功能开关
-		enable: false,
+		enable: true,
+		// 未指定封面的文章从这里稳定随机抽取，顺序变化会改变已有文章的分配
+		localImages: [
+			"/assets/images/article-covers/anime-sakura.png",
+			"/assets/images/article-covers/anime-bamboo.jpg",
+			"/assets/images/article-covers/pastel-clock.jpg",
+			"/assets/images/article-covers/love-letter.jpg",
+			"/assets/images/article-covers/autumn-leaves.jpg",
+			"/assets/images/article-covers/study-desk.jpg",
+			"/assets/images/article-covers/anime-red-bow.png",
+			"/assets/images/article-covers/elf-sunlight.jpg",
+			"/assets/images/article-covers/blue-mountain-elf.png",
+		],
 		// 封面图API列表
 		apis: [
 			"https://t.alcy.cc/pc",

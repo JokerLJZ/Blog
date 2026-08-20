@@ -3,6 +3,7 @@ title: "SMA实盘交易日志 — 2026年08月"
 published: 2026-08-01
 updated: 2026-08-20
 description: "2026年08月 SMA 策略实盘交易日志（按日记录，最新优先）"
+image: "/assets/images/article-covers/anime-sakura.png"
 tags: ["SMA", "实盘交易", "交易日志"]
 category: "量化交易"
 draft: false

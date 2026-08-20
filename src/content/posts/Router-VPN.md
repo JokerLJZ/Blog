@@ -2,6 +2,7 @@
 title: "小米路由器局域网科学上网"
 published: 2025-12-12
 description: "小米路由器配置 ShellClash（ShellCrash）实现全屋透明代理的折腾记录"
+image: "/assets/images/article-covers/love-letter.jpg"
 tags: ["工具", "网络"]
 category: "技术分享"
 draft: false
