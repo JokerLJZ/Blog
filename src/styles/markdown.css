@@ -194,6 +194,28 @@
   tr:nth-child(even) td {
     @apply bg-(--btn-plain-bg-active);
   }
+
+  /* 长文本说明表格在文章宽度内换行，避免被 max-content 撑成超宽表格 */
+  section:has(> h3[id="4-阵容整体运行逻辑"]) {
+    table {
+      width: 100%;
+      min-width: 0;
+      table-layout: fixed;
+    }
+
+    th,
+    td {
+      min-width: 0;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+      line-height: 1.7;
+    }
+
+    th:first-child,
+    td:first-child {
+      width: 5rem;
+    }
+  }
 }
 
 body.wallpaper-transparent .custom-md {
