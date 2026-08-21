@@ -48,8 +48,8 @@ export const siteConfig: SiteConfig = {
 	// 使用透明 PNG，兼容浏览器 favicon 和 OpenGraph 图片生成
 	favicon: [
 		{
-			src: "/assets/images/logo/stickman-life-avatar.png",
-			sizes: "512x512",
+			src: "/assets/images/logo/stickman-life-favicon.png",
+			sizes: "1408x1408",
 		},
 	],
 
