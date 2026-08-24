@@ -4,8 +4,9 @@ import { i18n } from "@i18n/translation";
 import { getCategoryUrl } from "@utils/url-utils";
 
 // // Retrieve posts and sort them by publication date
-async function getRawSortedPosts() {
+async function getRawSortedPosts(includeDrafts = false) {
 	const allBlogPosts = await getCollection("posts", ({ data }) => {
+		if (includeDrafts) return true;
 		return import.meta.env.PROD ? data.draft !== true : true;
 	});
 
@@ -24,6 +25,25 @@ async function getRawSortedPosts() {
 
 export async function getSortedPosts(): Promise<CollectionEntry<"posts">[]> {
 	const sorted = await getRawSortedPosts();
+
+	for (let i = 1; i < sorted.length; i++) {
+		sorted[i].data.nextSlug = sorted[i - 1].id;
+		sorted[i].data.nextTitle = sorted[i - 1].data.title;
+	}
+	for (let i = 0; i < sorted.length - 1; i++) {
+		sorted[i].data.prevSlug = sorted[i + 1].id;
+		sorted[i].data.prevTitle = sorted[i + 1].data.title;
+	}
+
+	return sorted;
+}
+
+/**
+ * 获取所有文章页面，包括 draft 文章。
+ * draft 文章仍然不会出现在首页等公共列表中，但可以通过已知 URL 访问。
+ */
+export async function getAllSortedPosts(): Promise<CollectionEntry<"posts">[]> {
+	const sorted = await getRawSortedPosts(true);
 
 	for (let i = 1; i < sorted.length; i++) {
 		sorted[i].data.nextSlug = sorted[i - 1].id;
