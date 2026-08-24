@@ -1,9 +1,8 @@
 ---
 title: "SMA 实盘交易日志"
 published: 2026-03-01
-updated: 2026-08-21
+updated: 2026-08-24
 description: "SMA 策略实盘交易日志总览（按月归集）"
-image: "/assets/images/article-covers/anime-bamboo.jpg"
 tags: ["SMA", "实盘交易", "交易日志"]
 category: "量化交易"
 pinned: true
