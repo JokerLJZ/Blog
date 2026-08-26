@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>stickman.life 水印去除对比</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f6f8; color: #1f2329; padding: 32px 24px; }
+  h1 { font-size: 22px; margin-bottom: 6px; }
+  .sub { color: #646a73; font-size: 13px; margin-bottom: 28px; }
+  .card { background: #fff; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,.06); padding: 20px; margin-bottom: 28px; }
+  .card h2 { font-size: 16px; margin-bottom: 4px; display: flex; align-items: center; gap: 10px; }
+  .badge { font-size: 11px; background: #e8f3ff; color: #0d6efd; padding: 2px 8px; border-radius: 10px; font-weight: 500; }
+  .meta { color: #8f959e; font-size: 12px; margin-bottom: 14px; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .col h3 { font-size: 13px; color: #646a73; margin-bottom: 8px; font-weight: 600; }
+  .col .orig-tag { color: #d93026; } .col .new-tag { color: #00a870; }
+  .imgwrap { border: 1px solid #e5e6eb; border-radius: 8px; overflow: hidden; background: repeating-conic-gradient(#fff 0 25%, #f2f3f5 0 50%) 0 0 / 16px 16px; }
+  .imgwrap img { display: block; width: 100%; height: auto; }
+  .zoom-wrap { position: relative; border: 1px solid #e5e6eb; border-radius: 8px; overflow: hidden; background: repeating-conic-gradient(#fff 0 25%, #f2f3f5 0 50%) 0 0 / 16px 16px; }
+  .zoom-wrap img { display: block; width: 100%; height: auto; }
+  .zoom-hint { position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,.65); color: #fff; font-size: 11px; padding: 3px 8px; border-radius: 10px; }
+  .zoom-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 12px; }
+  .note { font-size: 12px; color: #8f959e; margin-top: 10px; }
+  @media (max-width: 900px) { .row, .zoom-row { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+  <h1>stickman.life · 水印去除对比</h1>
+  <p class="sub">左侧为原图（含「豆包 AI 生成」水印），右侧为处理后的新文件 stickman-life-N.svg；下方为右下角水印区域放大对比。</p>
+
+  <script>
+  const items = [1, 2, 3, 4];
+  const regions = {
+    1: { src: "source-converted/stickman-life-source-1.svg", new: "stickman-life-1.svg", zoom: "right 5% bottom 6% / 60% 45%" },
+    2: { src: "source-converted/stickman-life-source-2.svg", new: "stickman-life-2.svg", zoom: "right 5% bottom 5% / 55% 40%" },
+    3: { src: "source-converted/stickman-life-source-3.svg", new: "stickman-life-3.svg", zoom: "right 5% bottom 5% / 55% 40%" },
+    4: { src: "source-converted/stickman-life-source-4.svg", new: "stickman-life-4.svg", zoom: "right 5% bottom 5% / 55% 40%" },
+  };
+  let html = "";
+  for (const i of items) {
+    const r = regions[i];
+    html += `
+    <div class="card">
+      <h2>图 ${i} <span class="badge">原图尺寸与 viewBox 保持不变</span></h2>
+      <div class="meta">原文件：${r.src} → 新文件：${r.new}</div>
+      <div class="row">
+        <div class="col"><h3 class="orig-tag">原图</h3><div class="imgwrap"><img src="${r.src}" alt="原图${i}"></div></div>
+        <div class="col"><h3 class="new-tag">去水印后</h3><div class="imgwrap"><img src="${r.new}" alt="去水印${i}"></div></div>
+      </div>
+      <div class="zoom-row">
+        <div class="col"><h3>右下角放大（原图）</h3><div class="zoom-wrap"><img src="${r.src}" style="object-fit:cover; object-position: ${r.zoom}; height: 220px;" alt=""><span class="zoom-hint">水印位置</span></div></div>
+        <div class="col"><h3>右下角放大（去水印后）</h3><div class="zoom-wrap"><img src="${r.new}" style="object-fit:cover; object-position: ${r.zoom}; height: 220px;" alt=""><span class="zoom-hint">已清除</span></div></div>
+      </div>
+    </div>`;
+  }
+  document.body.insertAdjacentHTML("beforeend", html);
+  </script>
+</body>
+</html>
