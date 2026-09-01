@@ -1,7 +1,7 @@
 ---
 title: "SMA 实盘交易日志"
 published: 2026-03-01
-updated: 2026-08-31
+updated: 2026-09-01
 description: "SMA 策略实盘交易日志总览（按月归集）"
 tags: ["SMA", "实盘交易", "交易日志"]
 category: "量化交易"
@@ -13,6 +13,7 @@ draft: false
 
 ## 月度日志
 
+- [2026年09月](/posts/trading-log-2026-09/)
 - [2026年08月](/posts/trading-log-2026-08/)
 - [2026年07月](/posts/trading-log-2026-07/)
 - [2026年06月](/posts/trading-log-2026-06/)
