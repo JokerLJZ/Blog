@@ -4,7 +4,7 @@ export type CoverImageConfig = {
 	showLoading?: boolean; // 是否显示加载动画
 	randomCoverImage: {
 		enable: boolean; // 是否启用随机图功能
+		localImages: string[]; // 未指定封面时稳定抽取的本地封面图
 		apis: string[]; // 随机图API列表
-		localImages: string[]; // 本地随机封面图列表
 	};
 };
